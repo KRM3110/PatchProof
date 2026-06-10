@@ -1,0 +1,38 @@
+# Held-out VUL4J ids used by eval/benchmark.py — the held-out evaluation set.
+# These projects must NEVER appear in training. data/build_dataset.py filters
+# by CVE id (via held_out_cves.txt); this file holds the matching VUL4J ids
+# in the form the verifier checks out (`vul4j checkout -i <id>`).
+#
+# Source: /Users/krm/Downloads/vul4j_dataset.csv. Base ids only (no -S split
+# variants), restricted to ids backed by a real CVE so they line up with
+# held_out_cves.txt. ~20 ids — wide enough for a meaningful Slide-4 chart,
+# small enough that the verifier loop finishes inside one MI300X session.
+#
+# If a specific id keeps failing checkout/compile in your env, comment it out
+# rather than deleting — keeps the audit trail honest.
+
+VUL4J-1
+VUL4J-2
+VUL4J-6
+VUL4J-7
+VUL4J-8
+VUL4J-10
+VUL4J-12
+VUL4J-13
+VUL4J-14
+VUL4J-15
+VUL4J-20
+VUL4J-22
+VUL4J-23
+VUL4J-25
+VUL4J-26
+VUL4J-30
+VUL4J-33
+VUL4J-40
+VUL4J-43
+VUL4J-47
+VUL4J-50
+VUL4J-53
+VUL4J-57
+VUL4J-66
+VUL4J-73

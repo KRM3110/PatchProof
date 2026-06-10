@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ── 1. Vul4J — eval benchmark + the verifier harness ───────────────
+# The prebuilt image bundles the repo, Maven, JDK 7/8/11/16, and warmed
+# dependency caches, so vulns reproduce without host setup.
+docker pull tuhhsoftsec/vul4j
+git clone https://github.com/tuhh-softsec/vul4j          # for the CSV + scripts
+
+# ── 2. llm-vul — eval pairs, known-good ids, per-vuln method files ─
+git clone https://github.com/lin-tan/llm-vul
+# point your smoke test at this:
+#   export LLM_VUL_ROOT=$(pwd)/llm-vul
+
+# ── 3. CVEfixes — training data ────────────────────────────────────
+# Option A (canonical SQLite, matches build_dataset.py's schema):
+pip install zenodo-get
+zenodo_get 10.5281/zenodo.4476563     # downloads the dataset dump(s)
+# then restore whatever it pulled, e.g.:
+#   gunzip CVEfixes_v*.sql.gz
+#   sqlite3 CVEfixes.db < CVEfixes_v*.sql
+
+# Option B (lighter pull, pre-parsed — no SQL restore):
+pip install -U huggingface_hub
+huggingface-cli download hitoshura25/cvefixes --repo-type dataset --local-dir ./cvefixes_hf

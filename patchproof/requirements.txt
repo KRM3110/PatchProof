@@ -1,0 +1,29 @@
+# Verifier (CPU) — minimal; relies on the Vul4J docker image for Java/Maven.
+# Step 1 deps: stdlib only.
+
+# Step 3 — agents + orchestrator
+langgraph>=0.2.0
+
+# Step 3 — unit tests
+pytest>=8.0
+
+# Step 4 — fine-tuning (MI300X / ROCm).
+# IMPORTANT: torch must be the ROCm wheel on the AMD box. Install it before
+# the lines below by following the AMD Developer Cloud setup, e.g.:
+#   pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/rocm6.x
+# Only THEN pip install -r requirements.txt for the rest.
+unsloth
+trl>=0.10
+datasets>=2.19
+transformers>=4.44
+peft>=0.11
+accelerate>=0.30
+
+# Step 5/6 — serving + eval client. The vllm + ROCm install is documented in
+# serve/README.md; only the client-side bits belong here.
+openai>=1.30
+matplotlib>=3.8
+
+# Step 7 — demo UI. Streamlit is the only added dep; replay mode imports nothing
+# else, so the recording laptop doesn't need vLLM / langgraph / docker.
+streamlit>=1.32
