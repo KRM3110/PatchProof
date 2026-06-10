@@ -3,7 +3,6 @@
 Self-hosted multi-agent system that fixes Java security vulnerabilities and
 *proves* each fix by running the real exploit + regression suite.
 
-See `CLAUDE.md` (repo root) for the architecture, build order, and conventions.
 See `RUNBOOK.md` for the canonical step-by-step run order on the AMD MI300X box
 — this README only covers per-step quick starts.
 
@@ -140,7 +139,7 @@ Side-by-side (base vs tuned, replay-only). Cached single-vuln runs live in
 ## Layout
 ```
 patchproof/
-├── CLAUDE.md, RUNBOOK.md, README.md, requirements.txt, config.py
+├── RUNBOOK.md, README.md, requirements.txt, config.py
 ├── data/        dataset builder + restored CVEfixes DB + held-out lists
 ├── verifier/    deterministic Vul4J-in-Docker verifier (source of truth)
 ├── train/       Unsloth + TRL fine-tune
